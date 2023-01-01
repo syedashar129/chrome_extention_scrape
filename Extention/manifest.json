@@ -1,0 +1,9 @@
+{
+  "name":  "Scrapping Extention",
+  "description" : "This will scrape a website",
+  "version" : "1.0",
+  "manifest_version" : 3,
+  "action" : {
+    "default_popup" : "popup.html"
+  }
+}
