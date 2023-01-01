@@ -22,5 +22,15 @@ emailScraper.addEventListener("click", async () => {
 
 // function that scrapes
 function scrapingEmailsOnPage() {
-    alert('You clicked on the button')
+
+    // create regex to recognize email
+    const emailsRegex = /[\w\.=-]+@[\w\.-]+\.[\w]{2,3}/gim;
+
+    // match words that appear as the emailsregex
+    let emails = document.body.innerHTML.match(emailsRegex);
+
+    // alert
+    alert(emails)
+
+
 }
