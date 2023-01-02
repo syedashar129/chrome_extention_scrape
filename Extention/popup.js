@@ -1,9 +1,11 @@
 let emailScraper = document.getElementById("scrapeEmail")
 let emailList = document.getElementById("emailList")
+let counter = document.getElementById("counter")
 
-// add listener for chrome message (to display the emails on extention)
+// add listener for chrome message (to display the emails on extension)
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let emails = request.emails;
+    let count = 0;
 
     if (emails == null || emails.length == 0){
         let li = document.createElement("li");
@@ -12,10 +14,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
     else{
         emails.forEach((email) => {
+            count += 1;
+
             let li = document.createElement("li");
             li.innerText = email;
             emailList.appendChild(li);
         })
+
+        //to display the number of emails
+        let p = document.createElement("p")
+        p.innerText = "Number of emails: " + count;
+        counter.appendChild(p);
 
     }
 
