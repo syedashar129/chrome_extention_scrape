@@ -6,6 +6,9 @@ let counter = document.getElementById("counter")
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let emails = request.emails;
     let count = 0;
+    let stack = [];
+    const push = (item) => stack.push(item);
+    const pop = (item) => stack.pop();
 
     if (emails == null || emails.length == 0){
         let li = document.createElement("li");
@@ -14,11 +17,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
     else{
         emails.forEach((email) => {
-            count += 1;
 
-            let li = document.createElement("li");
-            li.innerText = email;
-            emailList.appendChild(li);
+            if (!stack.includes(email)){
+                count += 1;
+                push(email)
+
+                let li = document.createElement("li");
+                li.innerText = email;
+                emailList.appendChild(li);
+            }
+
         })
 
         //to display the number of emails
